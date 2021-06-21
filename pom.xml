@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
+  <modelVersion>4.0.0</modelVersion>  
+  <groupId>com.cts</groupId>  
+  <artifactId>MyWebApp</artifactId>  
+  <packaging>war</packaging>  
+  <version>0.0.1-SNAPSHOT</version>  
+  <name>MyWebApp Maven Webapp</name>  
+  <url>http://maven.apache.org</url>  
+  <dependencies> 
+    <dependency> 
+      <groupId>junit</groupId>  
+      <artifactId>junit</artifactId>  
+      <version>3.8.1</version>  
+      <scope>test</scope> 
+    </dependency>  
+    <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->  
+    <dependency> 
+      <groupId>javax.servlet</groupId>  
+      <artifactId>servlet-api</artifactId>  
+      <version>2.5</version> 
+    </dependency> 
+  </dependencies>  
+  <build> 
+    <finalName>ROOT</finalName>  
+    <plugins> 
+      <plugin> 
+        <groupId>org.eclipse.jetty</groupId>  
+        <artifactId>jetty-maven-plugin</artifactId>  
+        <version>9.2.0.M0</version> 
+      </plugin>  
+      <plugin> 
+        <groupId>com.microsoft.azure</groupId>  
+        <artifactId>azure-webapp-maven-plugin</artifactId>  
+        <version>1.12.0</version>  
+        <configuration> 
+          <schemaVersion>v2</schemaVersion>  
+          <subscriptionId>79929827-b3c7-46fc-8cd4-565db4532151</subscriptionId>  
+          <appSettings> 
+            <property> 
+              <name>JAVA_OPTS</name>  
+              <value>-Djava.library.path=c:\dev\tomcat\bin</value> 
+            </property> 
+          </appSettings>  
+          <resourceGroup>az20d1-supplychain-dataplatform-m2o</resourceGroup>  
+          <appName>JavaApp</appName>  
+          <region>West Europe</region>  
+          <runtime> 
+            <os>windows</os>  
+            <!-- Please change if required -->  
+            <webContainer>Tomcat 9</webContainer>  
+            <!-- For war package - 'Tomcat 8.5' , For jar package 'Java SE' -->  
+            <javaVersion>Java 11</javaVersion> 
+          </runtime>  
+          <deployment> 
+            <resources> 
+              <resource> 
+                <directory>${project.basedir}/target</directory>  
+                <includes> 
+                  <include>*.war</include>  
+                  <include>web.config</include> 
+                </includes> 
+              </resource> 
+            </resources> 
+          </deployment>  
+          <deploymentSlot> 
+            <name>app</name>  
+            <configurationSource>config</configurationSource> 
+          </deploymentSlot>  
+          <pricingTier>P1v2</pricingTier>
+        </configuration> 
+      </plugin> 
+    </plugins> 
+  </build> 
+</project>
